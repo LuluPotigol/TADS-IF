@@ -1,0 +1,87 @@
+use "jerimum"
+use "jerimum.Teclado"
+
+fundo = Imagem("brasil.jpg")
+pet = Imagem("y.png").fatie(68,66)
+obs = Imagem("bomba.png")
+var i=1
+
+var px = 0
+var index = 1
+var ms = Relógio.milisegundos
+var ms_c = Relógio.milisegundos
+
+#VARIAVEIS PARA OBSTACULO
+var y1 := -aleatório(200)
+var x1 := aleatório(20, 380)
+var ativa := verdadeiro
+
+#PULO
+var pulo := falso
+pular ()
+  pulo := verdadeiro
+  escreva "teste2"
+fim
+
+# FIM PULO
+
+
+desenhe()
+
+       fundo.desenhe(0-px, 0, 0)
+       fundo.desenhe(650-px, 0, 0)
+    #OBSTACULO
+       obs.desenhe(640-px,400,2)
+
+    #LOCOMOCAO PET INICIO
+        se Relógio.milisegundos > ms+100  então
+            se index <  pet.tamanho então
+              index := index+1
+            senão
+             index := 1
+            fim
+             ms := Relógio.milisegundos
+        fim
+
+        #CAMANDO pulo
+          pet[index].desenhe(50,380, 2)
+           escreva pulo
+           escreva TECLA_ESPAÇO
+    #LOCOMOCAO PET FIM
+
+
+
+
+fim
+
+
+atualize()
+
+    #MAPA MOVENDO, PX ATRIBUTO NO EIXO X
+         se  Relógio.milisegundos > ms_c+20 então
+            se px > 650 então
+              px := 0
+            senão
+              px := px + 5
+            fim
+             ms_c := Relógio.milisegundos
+           fim
+     #MAPA MOVENDO, PX ATRIBUTO NO EIXO X
+
+     #CHAMANDO pular
+     se TECLA_ESPAÇO entao
+        pet[index].desenhe(50,410, 2)
+        escreva "teste"
+     se pulo==falso entao
+           pet[index].desenhe(50,380, 2)
+     fim
+ fim
+
+
+
+
+
+
+fim
+
+jogo.iniciar("Teste",640, 480,atualize, desenhe )
